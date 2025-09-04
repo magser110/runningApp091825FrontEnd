@@ -1,0 +1,13 @@
+<p>navbar works!</p>
+<nav class="navbar">
+  <div class="running">
+    <a routerLink="/">Running logs</a>
+  </div>
+  <div class="nav-links">
+    @if (authService.isLoggedIn()){
+      <button (click)="logout()">Logout</button>
+    }@else {
+      <a routerlink="/login">Login</a>
+    }
+  </div>
+</nav>
