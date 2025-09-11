@@ -16,7 +16,7 @@ export class RunService {
   }
 
   getRunById(id: number): Observable<Run>{
-    return this.http.get.
+    return this.http.get<Run>(`${this.url}/${id}`);
   }
 
   createRun(run: {distance: number; time: number}): Observable<Run>

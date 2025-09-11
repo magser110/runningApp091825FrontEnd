@@ -1,1 +1,14 @@
 <p>run-list works!</p>
+<h1>Runs</h1>
+<div class="run-form">
+  <input type="number" [(ngModel)]="newRun" placeholder="Add distance"/>
+  <input type="number" [(ngModel)]="newRunTime"
+  placeholder="Add time"/>
+  <button (click)="addRun()">Add run</button>
+</div>
+<ul>
+  <li *ngFor="let run of runs">
+    <span>{{ run.distance}} {{ run.time}}</span>
+    <button (click)="deleteRun(run.id)">Delete</button>
+  </li>
+</ul>

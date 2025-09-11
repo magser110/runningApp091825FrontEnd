@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { RunService } from '../services/run.service';
 import { Run } from '../models/run';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-run-list',
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './run-list.component.html',
   styleUrl: './run-list.component.scss'
 })
@@ -29,9 +31,23 @@ export class RunListComponent implements OnInit{
       time: this.newRunTime
     };
 
-    this.runService.createRun(run).subscribe(this.newRun => {
-      this.runs.push(this.newRun);
-      this.newRun ='';
+    this.runService.createRun(run).subscribe(newRun => {
+      this.runs.push(newRun);
+      this.newRun = 0; //reset after adding
+    });
+  }
+
+  updateRun(run: Run){
+    this.runService.updateRun(run).subscribe(updateRun => {
+      const indexRun = this.runs.findIndex(run => run.id === updateRun.id);
+      this.runs[indexRun] = updateRun;
+    });
+  }
+
+  deleteRun(id: number){
+    this.runService.deleteRun(id).subscribe({
+      next: () => this.runs = this.runs.filter(run => run.id !== id),
+      error: (err) => console.error(err)
     });
   }
 }
