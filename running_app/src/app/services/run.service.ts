@@ -19,10 +19,9 @@ export class RunService {
     return this.http.get<Run>(`${this.url}/${id}`);
   }
 
-  createRun(run: {distance: number; time: number}): Observable<Run>
-{
-return this.http.post<Run>(this.url, run);
-}
+  createRun(run: {distance: number; time: number}): Observable<Run>{
+    return this.http.post<Run>(this.url, run);
+  }
 
   updateRun(run: Run): Observable<Run>{
     return this.http.put<Run>(`${this.url}/${run.id}`, run);

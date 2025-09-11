@@ -1,0 +1,21 @@
+<p>run-new works!</p>
+<div class="container">
+  <h1>
+    Add New Run
+  </h1>
+  <form [formGroup]="runForm" (ngSubmit)="onSubmit()" class="form">
+    <label for="distance">Distance (miles):</label>
+    <input id="distance" formControlName="distance" type="number" step="0.01" />
+    <div *ngIf="runForm.get('distance')?.invalid && runForm.get('distance')?.touched" class="error">
+      Distance is required and must be a positive number.
+    </div>
+
+    <label for="time">Time (minutes):</label>
+    <input id="time" formControlName="time" type="number" step="0.01" />
+    <div *ngIf="runForm.get('time')?.invalid && runForm.get('time')?.touched" class="error">
+      Time is required and must be a positive number.
+    </div>
+
+    <button type="submit" [disabled]="runForm.invalid">Add Run</button>
+  </form>
+</div>

@@ -5,9 +5,18 @@
   </div>
   <div class="nav-links">
     @if (authService.isLoggedIn()){
+      <a
+      routerLink="/runs/new"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{exact: true}"
+      >Add Run</a>
       <button (click)="logout()">Logout</button>
     }@else {
       <a routerlink="/login">Login</a>
     }
   </div>
 </nav>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
+
