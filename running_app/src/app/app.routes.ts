@@ -4,6 +4,7 @@ import { noAuthGuard } from './no-auth.guard';
 import { authGuard } from './auth.guard';
 import { RunListComponent } from './run-list/run-list.component';
 import { RunNewComponent } from './features/runs/run-new/run-new.component';
+import { SignupComponent } from './signup/signup.component';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,11 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [noAuthGuard],
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
     canActivate: [noAuthGuard],
   },
   {
