@@ -18,7 +18,9 @@ export class RunListComponent implements OnInit{
   constructor(private runService: RunService){}
 
   ngOnInit(): void {
-    this.runService.getRuns().subscribe(runs => this.runs = runs);
+    this.runService.getRuns().subscribe(runs => {
+      console.log(runs);
+      this.runs = runs.payload});
   }
 
   addRun(){

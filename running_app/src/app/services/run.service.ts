@@ -11,8 +11,8 @@ export class RunService {
 
   constructor(private http: HttpClient) { }
 
-  getRuns(): Observable<Run[]>{
-    return this.http.get<Run[]>(this.url);
+  getRuns(): Observable<{payload: Run[]}>{
+    return this.http.get<{payload: Run[]}>(this.url);
   }
 
   getRunById(id: number): Observable<Run>{
