@@ -1,6 +1,10 @@
-<p>login works!</p>
+<header class="login-header">Login</header>
+<body>
+<div class="login-container">
 <form (ngSubmit)="login()">
   <input type="text" [(ngModel)]="username" name="username" placeholder="username" required />
   <input type="text" [(ngModel)]="password" name="password" placeholder="password" required />
   <button type="submit">Login</button>
 </form>
+</div>
+</body>
