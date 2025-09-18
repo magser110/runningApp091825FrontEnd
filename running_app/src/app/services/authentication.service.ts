@@ -8,6 +8,7 @@ import { HttpClient} from '@angular/common/http'
 })
 export class AuthenticationService {
   private readonly tokenSubject = new BehaviorSubject<string | null>(null);
+  
   constructor(private http: HttpClient, private router: Router) { }
 
   signUp(user: any){

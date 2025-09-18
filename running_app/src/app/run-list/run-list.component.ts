@@ -4,6 +4,7 @@ import { Run } from '../models/run';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-run-list',
   imports: [FormsModule, CommonModule],
@@ -14,6 +15,7 @@ export class RunListComponent implements OnInit{
   runs: Run[] = [];
   newRun: number = 1; //mile
   newRunTime: number = 12 ; //minutes
+  newRunDate: Date = new Date(); //current date
 
   constructor(private runService: RunService){}
 
@@ -30,13 +32,17 @@ export class RunListComponent implements OnInit{
 
     const run = {
       distance: this.newRun,
-      time: this.newRunTime
+      time: this.newRunTime,
+      date: this.newRunDate
     };
 
     this.runService.createRun(run).subscribe(newRun => {
       this.runs.push(newRun);
       this.newRun = 0; //reset after adding
-    });
+      this.newRunTime = 0; //reset after adding
+      this.newRunDate = new Date(); //reset after adding
+    } ,
+    error => console.error('Error adding run:', error));
   }
 
   updateRun(run: Run){

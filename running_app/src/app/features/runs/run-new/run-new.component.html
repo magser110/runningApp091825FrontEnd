@@ -16,6 +16,12 @@
       Time is required and must be a positive number.
     </div>
 
+    <label for="date">Date:</label>
+    <input id="date" formControlName="date" type="date" />
+    <div *ngIf="runForm.get('date')?.invalid && runForm.get('date')?.touched" class="error">
+      Date is required.
+    </div>
+
     <button type="submit" [disabled]="runForm.invalid">Add Run</button>
   </form>
 </div>

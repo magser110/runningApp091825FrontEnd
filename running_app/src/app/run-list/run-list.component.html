@@ -3,11 +3,17 @@
   <input type="number" [(ngModel)]="newRun" placeholder="Add distance"/>
   <input type="number" [(ngModel)]="newRunTime"
   placeholder="Add time"/>
+  <input type="date" [(ngModel)]="newRunDate" placeholder="Add date"/>
   <button (click)="addRun()">Add run</button>
 </div>
 <ul>
   <li *ngFor="let run of runs">
-    <span>{{ run.distance}} {{ run.time}}</span>
+    <span>
+      <label>Distance: </label>{{ run.distance}}
+      <label>Time: </label>{{ run.time}}</span>
+      <label>Date: </label>{{ run.date | date:'shortDate'}}
+    <!-- </span> -->
+    <button (click)="updateRun(run)">Update</button>
     <button (click)="deleteRun(run.id)">Delete</button>
   </li>
 </ul>
