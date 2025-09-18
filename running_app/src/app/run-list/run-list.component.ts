@@ -48,7 +48,10 @@ export class RunListComponent implements OnInit{
 
   deleteRun(id: number){
     this.runService.deleteRun(id).subscribe({
-      next: () => this.runs = this.runs.filter(run => run.id !== id),
+      next: () => {
+         this.runs = this.runs.filter(run => run.id !== id);
+         console.log(`Run with id ${id} deleted`);
+      },
       error: (err) => console.error(err)
     });
   }

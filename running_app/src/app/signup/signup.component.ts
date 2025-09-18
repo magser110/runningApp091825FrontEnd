@@ -16,10 +16,10 @@ export class SignupComponent {
     email: '',
     password: '',
     password_confirmation: '',
-    height: 0,
-    weight: 0,
+    height: null,
+    weight: null,
     gender: '',
-    age: 0
+    age: null
   }
 
   constructor(private authService: AuthenticationService, private router: Router){}

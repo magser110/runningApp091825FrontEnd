@@ -27,7 +27,7 @@ export class RunService {
     return this.http.put<Run>(`${this.url}/${run.id}`, run);
   }
 
-  deleteRun(id: number): Observable<Run>{
-    return this.http.delete<Run>(`${this.url}`);
+  deleteRun(id: number): Observable<void>{
+    return this.http.delete<void>(`${this.url}/${id}`);
   }
 }
