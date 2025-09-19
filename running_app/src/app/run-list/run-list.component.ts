@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { RunService } from '../services/run.service';
 import { Run } from '../models/run';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-run-list',
-  imports: [FormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './run-list.component.html',
   styleUrl: './run-list.component.scss'
 })
@@ -47,10 +47,11 @@ export class RunListComponent implements OnInit{
 
 
 	updateRun(run: Run) {
-	  const { id, distance, time, date } = run;
-	  const runData = { distance, time, date };
+	  // const { id, distance, time, date } = run;
+    // console.log(run)
+	  const runData = { distance: this.newRun, time: this.newRunTime, date: this.newRunDate };
 
-	  this.runService.updateRunById(id, runData).subscribe((updatedRun) => {
+	  this.runService.updateRunById(run.id, runData).subscribe((updatedRun) => {
 	    const index = this.runs.findIndex(r => r.id === updatedRun.id);
 	    if (index !== -1) {
 	      this.runs[index] = updatedRun;

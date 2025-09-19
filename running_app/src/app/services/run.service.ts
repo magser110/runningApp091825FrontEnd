@@ -41,7 +41,7 @@ export class RunService {
 updateRunById(id: number, runData: NewRun | Partial<NewRun>): Observable<Run> {
   return this.http.put<Run>(
     `${this.url}/${id}`,
-    { run: runData }, // matches Rails strong params
+    { run: runData }, 
     { headers: this.getAuthHeaders() }
   );
 }
