@@ -5,8 +5,10 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CommonModule } from '@angular/common';
 
 
+
 @Component({
   selector: 'app-run-list',
+  standalone: true,
   imports: [ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './run-list.component.html',
   styleUrl: './run-list.component.scss'
