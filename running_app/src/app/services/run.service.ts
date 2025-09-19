@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Run } from '../models/run';
+import { Run, NewRun } from '../models/run';
 
 @Injectable({
   providedIn: 'root'
@@ -32,17 +32,19 @@ export class RunService {
   }
 
   // createRun(run: {distance: number; time: number}): Observable<Run>{
-  createRun(runData:any): Observable<Run>{
+  createRun(runData:NewRun): Observable<Run>{
     return this.http.post<Run>(this.url, runData, {
       headers: this.getAuthHeaders()
     });
   }
 
-  updateRun(run: Run): Observable<Run>{
-    return this.http.put<Run>(`${this.url}/${run.id}`, run, {
-      headers: this.getAuthHeaders()
-    });
-  }
+updateRunById(id: number, runData: NewRun | Partial<NewRun>): Observable<Run> {
+  return this.http.put<Run>(
+    `${this.url}/${id}`,
+    { run: runData }, // matches Rails strong params
+    { headers: this.getAuthHeaders() }
+  );
+}
 
   deleteRun(id: number): Observable<void>{
     return this.http.delete<void>(`${this.url}/${id}`,

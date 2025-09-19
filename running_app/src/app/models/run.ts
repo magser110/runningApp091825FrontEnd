@@ -4,3 +4,9 @@ export class Run {
   time: number = -1;
   date: Date = new Date();
 }
+
+export type NewRun = {
+  distance: number;
+  time: number;
+  date: Date;
+}

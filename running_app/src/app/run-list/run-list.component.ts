@@ -45,12 +45,18 @@ export class RunListComponent implements OnInit{
     error => console.error('Error adding run:', error));
   }
 
-  updateRun(run: Run){
-    this.runService.updateRun(run).subscribe(updateRun => {
-      const indexRun = this.runs.findIndex(run => run.id === updateRun.id);
-      this.runs[indexRun] = updateRun;
-    });
-  }
+
+	updateRun(run: Run) {
+	  const { id, distance, time, date } = run;
+	  const runData = { distance, time, date };
+
+	  this.runService.updateRunById(id, runData).subscribe((updatedRun) => {
+	    const index = this.runs.findIndex(r => r.id === updatedRun.id);
+	    if (index !== -1) {
+	      this.runs[index] = updatedRun;
+	    }
+	  });
+	}
 
   deleteRun(id: number){
     this.runService.deleteRun(id).subscribe({

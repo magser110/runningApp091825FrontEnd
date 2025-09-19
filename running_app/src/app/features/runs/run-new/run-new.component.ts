@@ -17,16 +17,12 @@ export class RunNewComponent {
   runForm = new FormGroup({
     distance: new FormControl(0, [Validators.required]),
     time: new FormControl(0, [Validators.required]),
-    date: new FormControl(this.formattedDate(), [Validators.required])
+    date: new FormControl(new Date(), [Validators.required])
   });
 
 
   constructor(private runService: RunService, private router: Router, private datePipe: DatePipe){}
-  }
 
-  private formattedDate(): string {
-    return this.datePipe.transform(new Date(), 'yyyy-MM-dd') || '';
-  }
 
   onSubmit() {
     if (this.runForm.invalid) {
@@ -36,16 +32,14 @@ export class RunNewComponent {
 
     const formValue = this.runForm.value;
 
-    const formattedDate = this.datePipe.transform(formValue.date, 'yyyy-MM-dd') || '';
-
     const runData = {
       distance: formValue.distance ?? 0,
       time: formValue.time ?? 0,
-      date: formattedDate || this.formattedDate()
+      date: formValue.date ?? new Date()
     };
 
     console.log('Submitting run:', runData);
-    
+
     this.runService.createRun(runData).subscribe({
       next: (run: Run) => {
         console.log('Run added', run);
@@ -56,6 +50,5 @@ export class RunNewComponent {
       },
     });
   }
-
 }
 

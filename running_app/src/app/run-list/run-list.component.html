@@ -10,9 +10,9 @@
   <li *ngFor="let run of runs">
     <span>
       <label>Distance: </label>{{ run.distance}}
-      <label>Time: </label>{{ run.time}}</span>
-      <label>Date: </label>{{ run.date | date:'shortDate'}}
-    <!-- </span> -->
+      <label>Time: </label>{{ run.time}}
+      <label>Date: </label>{{ run.date | date:'MM-dd-yyyy': 'UTC' }}
+    </span>
     <button (click)="updateRun(run)">Update</button>
     <button (click)="deleteRun(run.id)">Delete</button>
   </li>
