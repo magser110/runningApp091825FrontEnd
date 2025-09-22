@@ -3,13 +3,14 @@
     <a routerLink="/">Running logs</a>
   </div>
   <div class="nav-links">
-    @if (authService.isLoggedIn()){
-      <!-- <a routerLink="/runs/new"
+    <a
+      routerLink="/runs/new"
       routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{exact: true}" -->
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Add Run</a>
 
-      <!-- >Add Run</a> -->
-      <button (click)="authService.logout()">Logout</button>
+    @if (authService.isLoggedIn()){
+      <button (click)="logout()">Logout</button>
     }@else {
       <a routerLink="/login">Login</a>
       <a routerLink="/signup">Sign Up</a>

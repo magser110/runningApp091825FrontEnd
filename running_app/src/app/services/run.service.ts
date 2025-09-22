@@ -19,8 +19,8 @@ export class RunService {
     });
   }
 
-  getRuns(): Observable<{payload: Run[]}>{
-    return this.http.get<{payload: Run[]}>(this.url, {
+  getRuns(): Observable< Run[]>{
+    return this.http.get<Run[]>('http://localhost:3000/user_runs', {
       headers: this.getAuthHeaders()
     });
   }
@@ -41,7 +41,7 @@ export class RunService {
 updateRunById(id: number, runData: NewRun | Partial<NewRun>): Observable<Run> {
   return this.http.put<Run>(
     `${this.url}/${id}`,
-    { run: runData }, 
+    { run: runData },
     { headers: this.getAuthHeaders() }
   );
 }

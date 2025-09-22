@@ -1,0 +1,181 @@
+<!-- <p>running-dashboard works!</p>
+<div className="container mx-auto p-4 space-y-6">
+      {/* Header */}
+      <div className="text-center space-y-2">
+        <h1 className="text-4xl font-bold text-balance">RunTracker Pro</h1>
+        <p className="text-muted-foreground text-pretty">{"Track your runs, crush your goals, become unstoppable"}</p>
+      </div>
+
+      {/* Current Run Tracking */}
+      <Card className="bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/20">
+        <CardHeader className="text-center">
+          <CardTitle className="flex items-center justify-center gap-2">
+            <MapPin className="h-5 w-5" />
+            Current Run
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-3 gap-4 text-center">
+            <div>
+              <div className="text-2xl font-bold text-primary">{currentTime}</div>
+              <div className="text-sm text-muted-foreground">Time</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-primary">{currentDistance}</div>
+              <div className="text-sm text-muted-foreground">km</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-primary">{currentPace}</div>
+              <div className="text-sm text-muted-foreground">min/km</div>
+            </div>
+          </div>
+
+          <div className="flex justify-center gap-4">
+            <Button size="lg" onClick={handleStartStop} className="bg-primary hover:bg-primary/90">
+              {isRunning ? (
+                <>
+                  <Pause className="h-5 w-5 mr-2" />
+                  Pause Run
+                </>
+              ) : (
+                <>
+                  <Play className="h-5 w-5 mr-2" />
+                  Start Run
+                </>
+              )}
+            </Button>
+            {isRunning && (
+              <Button variant="destructive" size="lg">
+                <Square className="h-5 w-5 mr-2" />
+                Stop
+              </Button>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Weekly Goal Progress */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Target className="h-5 w-5 text-primary" />
+            Weekly Goal Progress
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex justify-between items-center">
+            <span className="text-sm font-medium">
+              {weeklyProgress} km of {weeklyGoal} km
+            </span>
+            <Badge variant="secondary" className="bg-primary/10 text-primary">
+              {Math.round(progressPercentage)}%
+            </Badge>
+          </div>
+          <Progress value={progressPercentage} className="h-3" />
+          <p className="text-sm text-muted-foreground">
+            {"Keep it up! You need "}
+            {weeklyGoal - weeklyProgress} km more to reach your goal.
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Recent Runs */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Clock className="h-5 w-5 text-primary" />
+            Recent Runs
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            {recentRuns.map((run, index) => (
+              <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
+                <div>
+                  <div className="font-medium">{run.date}</div>
+                  <div className="text-sm text-muted-foreground">{run.distance}</div>
+                </div>
+                <div className="text-right">
+                  <div className="font-medium">{run.time}</div>
+                  <div className="text-sm text-muted-foreground">{run.pace}/km</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Achievements */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Trophy className="h-5 w-5 text-primary" />
+            Achievements
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 gap-4">
+            {achievements.map((achievement, index) => {
+              const IconComponent = achievement.icon
+              return (
+                <div
+                  key={index}
+                  className={`flex items-center gap-3 p-3 rounded-lg border ${
+                    achievement.earned
+                      ? "bg-primary/10 border-primary/20 text-primary"
+                      : "bg-muted/30 border-muted text-muted-foreground"
+                  }`}
+                >
+                  <IconComponent className="h-6 w-6" />
+                  <span className="font-medium">{achievement.name}</span>
+                  {achievement.earned && (
+                    <Badge variant="secondary" className="ml-auto bg-primary/20 text-primary">
+                      Earned
+                    </Badge>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Quick Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <Card className="text-center">
+          <CardContent className="pt-6">
+            <div className="text-2xl font-bold text-primary">127</div>
+            <div className="text-sm text-muted-foreground">Total Runs</div>
+          </CardContent>
+        </Card>
+        <Card className="text-center">
+          <CardContent className="pt-6">
+            <div className="text-2xl font-bold text-primary">542</div>
+            <div className="text-sm text-muted-foreground">Total km</div>
+          </CardContent>
+        </Card>
+        <Card className="text-center">
+          <CardContent className="pt-6">
+            <div className="text-2xl font-bold text-primary">4:32</div>
+            <div className="text-sm text-muted-foreground">Avg Pace</div>
+          </CardContent>
+        </Card>
+        <Card className="text-center">
+          <CardContent className="pt-6">
+            <div className="text-2xl font-bold text-primary">18</div>
+            <div className="text-sm text-muted-foreground">This Month</div>
+          </CardContent>
+        </Card>
+      </div>
+
+
+      <Card className="bg-gradient-to-r from-primary/5 to-secondary/5 border-primary/10">
+        <CardContent className="pt-6 text-center">
+          <blockquote className="text-lg font-medium text-balance">
+            {"The miracle isn't that I finished. The miracle is that I had the courage to start."}
+          </blockquote>
+          <cite className="text-sm text-muted-foreground mt-2 block">- John Bingham</cite>
+        </CardContent>
+      </Card>
+    </div>
+<p>running-dashboard works!</p> -->

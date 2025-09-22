@@ -4,7 +4,7 @@ import { RunService } from '../../../services/run.service';
 import { Router } from '@angular/router';
 import { Run } from '../../../models/run';
 import { CommonModule, formatDate } from '@angular/common';
-import { DatePipe} from '@angular/common';
+// import { DatePipe} from '@angular/common';
 
 
 @Component({
@@ -15,14 +15,14 @@ import { DatePipe} from '@angular/common';
 })
 export class RunNewComponent {
   runForm = new FormGroup({
-    distance: new FormControl(0, [Validators.required]),
-    time: new FormControl(0, [Validators.required]),
+    distance: new FormControl(null, [Validators.required]),
+    time: new FormControl(null, [Validators.required]),
     date: new FormControl(new Date(), [Validators.required])
   });
 
 
-  constructor(private runService: RunService, private router: Router, private datePipe: DatePipe){}
-
+  constructor(private runService: RunService, private router: Router){}
+// private datePipe: DatePipe
 
   onSubmit() {
     if (this.runForm.invalid) {

@@ -4,7 +4,7 @@
     Add New Run
   </h1>
   <form [formGroup]="runForm" (ngSubmit)="onSubmit()" class="form">
-    <label for="distance">Distance (miles):</label>
+    <label for="distance">Distance (kilometers):</label>
     <input id="distance" formControlName="distance" type="number" step="0.01" />
     <div *ngIf="runForm.get('distance')?.invalid && runForm.get('distance')?.touched" class="error">
       Distance is required and must be a positive number.

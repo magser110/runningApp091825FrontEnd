@@ -8,11 +8,11 @@ import { HttpClient} from '@angular/common/http'
 })
 export class AuthenticationService {
   private readonly tokenSubject = new BehaviorSubject<string | null>(null);
-  
+
   constructor(private http: HttpClient, private router: Router) { }
 
-  signUp(user: any){
-    return this.http.post('http://localhost:3000/signup', user);
+  signUp(userData: any){
+    return this.http.post('http://localhost:3000/signup', {user: userData});
   }
 
   login(username: string, password: string){
